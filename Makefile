@@ -49,7 +49,7 @@ $(SHLIB) : $(SHOBJS)
 %.so : %.c
 	$(CC) -c $(CFLAGS) $(EXTRA_CFLAGS) -fPIC $< -o $@
 
-install : all $(PREFIX)
+install : all
 	mkdir -p $(PREFIX)/include
 	mkdir -p $(PREFIX)/lib
 	cp -a ad/ad9361_api.h libzaltys-ad9361.h $(PREFIX)/include
