@@ -1,42 +1,18 @@
-A wrapper for the Analog Devices AD9361 driver.
+LIBZALTYS-AD9361
+================
 
-Creates a shared library that can be used to help configure an
-AD9361/AD9364 device.
+A Linux shared-object library for configuring AD9361/AD9364 devices.
 
-The general idea is that user code calls a top-level library function
-(such as ad9361_lvds_init for device initialization) that then runs
-and starts calculating values for the AD9361 registers, which may
-involve reading some registers too.  During this process, to actually
-read and write the device registers, it calls back into low-level
-user-supplied functions.
 
-The main callback functions the user must supply are:-
-  spi_init
-  spi_read
-  spi_write_then_read
-see platform.h for prototypes.
+LICENSING NOTE
+--------------
 
-Pointers to these functions should be setup by calling the functions:-
-  ad9361_set_fn_spi_init
-  ad9361_set_fn_spi_read
-  ad9361_set_fn_spi_write_then_read
-with appropriate function pointers.  These pointers should be setup
-before any top-level functions are called!  See libzaltys-ad9361.h for
-prototypes.
+Source code inside the ad/ directory is from Analog Devices Inc
+and is subject to the licence described at the head of each file.
 
-Top-level functions include:-
-  ad9361_lvds_init
-  ad9361_cmos_init
-one of which should be called before any other top-level function is
-called.  Of which the following are some further examples:-
-  ad9361_set_tx_sampling_freq
-  ad9361_set_rx_sampling_freq
-  ad9361_set_tx_lo_freq
-  ad9361_set_rx_lo_freq
-see ad9361_api.h for a complete list with prototypes.
+Source outside of the ad/ directory is Silicon Infusion code and is
+supplied under an MIT licence, see LICENCE file for details.
 
-NOTE: source inside the ad/ directory is Analog Devices code.  Source
-outside of this directory is Silicon Infusion code.
-
-PDO
-29 June 2016
+--
+Silicon Infusion Ltd
+8 August 2016
