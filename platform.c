@@ -35,7 +35,7 @@
 **************************************************************************************************/
 
 #include <stdint.h>
-#include "util.h"
+#include "ad/util.h"
 
 /*
 ** Function pointers for calling back into VB code.

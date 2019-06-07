@@ -23,11 +23,11 @@
 #ifndef LIBZALTYS_AD9361_H
 #define LIBZALTYS_AD9361_H
 
-#include "ad9361_api.h"
+#include "ad/ad9361_api.h"
 
 /* Prototypes for the toplevel initialization functions */
-struct ad9361_rf_phy *ad9361_lvds_init()
-struct ad9361_rf_phy *ad9361_cmos_init()
+struct ad9361_rf_phy *ad9361_lvds_init();
+struct ad9361_rf_phy *ad9361_cmos_init();
 
 /* Prototypes for functions to setup the callback function pointers */
 void ad9361_set_fn_usleep(void (*fn)(unsigned long usleep));

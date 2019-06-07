@@ -15,18 +15,21 @@
 #
 #    Licence: MIT, see LICENCE file for details.
 #
-PREFIX=/usr
-EXTRA_CFLAGS=-std=c99 -I. -Iad
-AD_INCS=ad/common.h ad/util.h ad/ad9361.h ad/ad9361_api.h
-AD_SRCS=ad/util.c ad/ad9361.c ad/ad9361_api.c
-SI_INCS=platform.h libzaltys-ad9361.h
-SI_SRCS=platform.c default_init.c
-SRCS=$(AD_SRCS) $(SI_SRCS)
-OBJS=$(SRCS:c=o)
-SHOBJS=$(SRCS:c=so)
-LIB=libzaltys-ad9361.a
-SHLIB=libzaltys-ad9361.so
-LIBS=$(LIB) $(SHLIB)
+PREFIX ?= /usr/local
+
+EXTRA_CFLAGS = -std=c99 -I. -Iad
+
+AD_INCS = ad/common.h ad/util.h ad/ad9361.h ad/ad9361_api.h
+AD_SRCS = ad/util.c ad/ad9361.c ad/ad9361_api.c
+SI_INCS = platform.h libzaltys-ad9361.h
+SI_SRCS = platform.c default_init.c
+
+SRCS   = $(AD_SRCS) $(SI_SRCS)
+OBJS   = $(SRCS:c=o)
+SHOBJS = $(SRCS:c=so)
+LIB    = libzaltys-ad9361.a
+SHLIB  = libzaltys-ad9361.so
+LIBS   = $(LIB) $(SHLIB)
 
 all : $(AD_INCS) $(SI_INCS) $(LIBS)
 
@@ -43,9 +46,11 @@ $(SHLIB) : $(SHOBJS)
 	$(CC) -c $(CFLAGS) $(EXTRA_CFLAGS) -fPIC $< -o $@
 
 install : all
-	mkdir -p $(PREFIX)/include
+	mkdir -p $(PREFIX)/include/zaltys
+	mkdir -p $(PREFIX)/include/zaltys/ad
 	mkdir -p $(PREFIX)/lib
-	cp -a ad/ad9361_api.h libzaltys-ad9361.h $(PREFIX)/include
+	cp -a $(AD_INCS) $(PREFIX)/include/zaltys/ad
+	cp -a libzaltys-ad9361.h $(PREFIX)/include/zaltys
 	cp -a $(LIBS) $(PREFIX)/lib
 
 clean :
