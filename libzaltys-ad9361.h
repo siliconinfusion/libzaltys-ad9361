@@ -3,7 +3,7 @@
     Author                  : Paul Onions
     Creation date           : 16 December 2015
 
-    Copyright 2015 - 2016 Silicon Infusion Limited
+    Copyright 2015 - 2019 Silicon Infusion Limited
 
     Silicon Infusion Limited                 
     CP House
@@ -23,7 +23,7 @@
 #ifndef LIBZALTYS_AD9361_H
 #define LIBZALTYS_AD9361_H
 
-#include "ad/ad9361_api.h"
+#include "ad9361/ad9361_api.h"
 
 /* Prototypes for the toplevel initialization functions */
 struct ad9361_rf_phy *ad9361_lvds_init();

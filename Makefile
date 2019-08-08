@@ -2,7 +2,7 @@
 #    Author                  : Paul Onions
 #    Creation date           : 9 May 2014
 #
-#    Copyright 2015 - 2016 Silicon Infusion Limited
+#    Copyright 2015 - 2019 Silicon Infusion Limited
 #
 #    Silicon Infusion Limited
 #    CP House
@@ -47,9 +47,9 @@ $(SHLIB) : $(SHOBJS)
 
 install : all
 	mkdir -p $(PREFIX)/include/zaltys
-	mkdir -p $(PREFIX)/include/zaltys/ad
+	mkdir -p $(PREFIX)/include/zaltys/ad9361
 	mkdir -p $(PREFIX)/lib
-	cp -a $(AD_INCS) $(PREFIX)/include/zaltys/ad
+	cp -a $(AD_INCS) $(PREFIX)/include/zaltys/ad9361
 	cp -a libzaltys-ad9361.h $(PREFIX)/include/zaltys
 	cp -a $(LIBS) $(PREFIX)/lib
 
