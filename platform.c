@@ -269,6 +269,8 @@ void udelay(unsigned long usecs)
 
 void mdelay(unsigned long msecs)
 {
+  printf("libzaltys-ad9361:mdelay: %d\n", msecs);  /* !!! TEMP !!! */
+
   if (fn_mdelay != NULL)
     (fn_mdelay)(msecs);
 }
