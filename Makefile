@@ -17,7 +17,9 @@
 #
 PREFIX ?= /usr/local
 
-EXTRA_CFLAGS = -std=c99 -I. -Iad
+EXTRA_CFLAGS += -std=c99
+EXTRA_CFLAGS += -I.
+EXTRA_CFLAGS += -Iad
 
 AD_INCS = ad/common.h ad/util.h ad/ad9361.h ad/ad9361_api.h
 AD_SRCS = ad/util.c ad/ad9361.c ad/ad9361_api.c
@@ -37,7 +39,7 @@ $(LIB) : $(OBJS)
 	ar rv $(LIB) $(OBJS)
 
 $(SHLIB) : $(SHOBJS)
-	$(CC) -shared -fPIC -o $(SHLIB) $(SHOBJS)
+	$(CC) -shared -fPIC -o $(SHLIB) $(SHOBJS) -Wl,--version-script=libzaltys-ad9361.version
 
 %.o : %.c
 	$(CC) -c $(CFLAGS) $(EXTRA_CFLAGS) $< -o $@
