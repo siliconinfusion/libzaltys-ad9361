@@ -23,7 +23,7 @@ EXTRA_CFLAGS += -Iad
 
 AD_INCS = ad/common.h ad/util.h ad/ad9361.h ad/ad9361_api.h
 AD_SRCS = ad/util.c ad/ad9361.c ad/ad9361_api.c
-SI_INCS = platform.h libzaltys-ad9361.h
+SI_INCS = platform.h libzaltys-ad9361.h debug.h
 SI_SRCS = platform.c default_init.c
 
 SRCS   = $(AD_SRCS) $(SI_SRCS)
@@ -34,6 +34,9 @@ SHLIB  = libzaltys-ad9361.so
 LIBS   = $(LIB) $(SHLIB)
 
 all : $(AD_INCS) $(SI_INCS) $(LIBS)
+
+testing : EXTRA_CFLAGS += -DTESTING
+testing : $(AD_INCS) $(SI_INCS) $(LIBS)
 
 $(LIB) : $(OBJS)
 	ar rv $(LIB) $(OBJS)

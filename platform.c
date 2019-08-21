@@ -36,6 +36,7 @@
 
 #include <stdint.h>
 #include "ad/util.h"
+#include "debug.h"
 
 /*
 ** Function pointers for calling back into VB code.
@@ -166,6 +167,8 @@ unsigned char ad9361_read_rxbuf(unsigned pos) {
 */
 static void usleep(unsigned long usleep)
 {
+  DBGPRINTF("libzaltys-ad9361:usleep: %d\n", usleep);
+
   if (fn_usleep != NULL)
     (fn_usleep)(usleep);
 }
@@ -175,6 +178,8 @@ int32_t spi_init(uint32_t device_id,
                  uint8_t  clk_pha,
                  uint8_t  clk_pol)
 {
+  DBGPRINTF("libzaltys-ad9361:spi_init: %d\n", device_id);
+
   if (fn_spi_init != NULL) {
     return (fn_spi_init)(device_id, clk_pha, clk_pol);
   } else {
@@ -188,6 +193,8 @@ int32_t spi_read(uint8_t *data,
 {
   int rtncode = 0;
   unsigned n;
+
+  DBGPRINTF("libzaltys-ad9361:spi_read: %d\n", bytes_number);
 
   for (n=0; n<STATIC_RXBUF_LEN; n++)
     static_rxbuf[n] = 0;
@@ -209,6 +216,8 @@ int spi_write_then_read(struct spi_device *spi,
   int rtncode = 0;
   unsigned n;
 
+  DBGPRINTF("libzaltys-ad9361:spi_write_then_read: %d, %d\n", n_tx, n_rx);
+
   for (n=0; n<STATIC_RXBUF_LEN; n++)
     static_rxbuf[n] = 0;
 
@@ -224,6 +233,8 @@ int spi_write_then_read(struct spi_device *spi,
 
 void gpio_init(uint32_t device_id)
 {
+  DBGPRINTF("libzaltys-ad9361:gpio_init: %d\n", device_id);
+
   if (fn_gpio_init != NULL)
     (fn_gpio_init)(device_id);
 }
@@ -231,6 +242,8 @@ void gpio_init(uint32_t device_id)
 
 void gpio_direction(uint8_t pin, uint8_t direction)
 {
+  DBGPRINTF("libzaltys-ad9361:gpio_direction: %d, %d\n", pin, direction);
+
   if (fn_gpio_direction != NULL)
     (fn_gpio_direction)(pin, direction);
 }
@@ -238,6 +251,8 @@ void gpio_direction(uint8_t pin, uint8_t direction)
 
 bool gpio_is_valid(int number)
 {
+  DBGPRINTF("libzaltys-ad9361:gpio_is_valid: %d\n", number);
+
   if (fn_gpio_is_valid != NULL) {
     return (fn_gpio_is_valid)(number);
   } else {
@@ -248,6 +263,8 @@ bool gpio_is_valid(int number)
 
 void gpio_data(uint8_t pin, uint8_t data)
 {
+  DBGPRINTF("libzaltys-ad9361:gpio_data: %d, %d\n", pin, data);
+
   if (fn_gpio_data != NULL)
     (fn_gpio_data)(pin, data);
 }
@@ -255,6 +272,8 @@ void gpio_data(uint8_t pin, uint8_t data)
 
 void gpio_set_value(unsigned gpio, int value)
 {
+  DBGPRINTF("libzaltys-ad9361:gpio_set_value: %d, %d\n", gpio, value);
+
   if (fn_gpio_set_value != NULL)
     (fn_gpio_set_value)(gpio, value);
 }
@@ -262,6 +281,8 @@ void gpio_set_value(unsigned gpio, int value)
 
 void udelay(unsigned long usecs)
 {
+  DBGPRINTF("libzaltys-ad9361:udelay: %d\n", usecs);
+
   if (fn_udelay != NULL)
     (fn_udelay)(usecs);
 }
@@ -269,7 +290,7 @@ void udelay(unsigned long usecs)
 
 void mdelay(unsigned long msecs)
 {
-  printf("libzaltys-ad9361:mdelay: %d\n", msecs);  /* !!! TEMP !!! */
+  DBGPRINTF("libzaltys-ad9361:mdelay: %d\n", msecs);
 
   if (fn_mdelay != NULL)
     (fn_mdelay)(msecs);
@@ -278,6 +299,8 @@ void mdelay(unsigned long msecs)
 
 unsigned long msleep_interruptible(unsigned int msecs)
 {
+  DBGPRINTF("libzaltys-ad9361:msleep_interruptable: %d\n", msecs);
+
   if (fn_msleep_interruptable != NULL) {
     return (fn_msleep_interruptable)(msecs);
   } else {
@@ -288,6 +311,8 @@ unsigned long msleep_interruptible(unsigned int msecs)
 
 void axiadc_init(struct ad9361_rf_phy *phy)
 {
+  DBGPRINTF("libzaltys-ad9361:axiadc_init:\n", NULL);
+
   if (fn_axiadc_init != NULL)
     (fn_axiadc_init)(phy);
 }
@@ -295,6 +320,8 @@ void axiadc_init(struct ad9361_rf_phy *phy)
 
 unsigned int axiadc_read(struct axiadc_state *st, unsigned long reg)
 {
+  DBGPRINTF("libzaltys-ad9361:axiadc_read: 0x%08x\n", reg);
+
   if (fn_axiadc_read != NULL) {
     return (fn_axiadc_read)(st, reg);
   } else {
@@ -305,6 +332,8 @@ unsigned int axiadc_read(struct axiadc_state *st, unsigned long reg)
 
 void axiadc_write(struct axiadc_state *st, unsigned reg, unsigned val)
 {
+  DBGPRINTF("libzaltys-ad9361:axiadc_write: 0x%08x, 0x%08x\n", reg, val);
+
   if (fn_axiadc_write != NULL)
     (fn_axiadc_write)(st, reg, val);
 }
